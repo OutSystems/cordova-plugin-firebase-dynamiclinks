@@ -8,6 +8,9 @@ The changes documented here do not include those from the original repository.
 
 ## [Unreleased]
 
+## 2022-10-28
+- Android 13 changes  [RMET-813](https://outsystemsrd.atlassian.net/browse/RMET-1813)
+
 ## [5.0.0-OS7]
 
 ## 2022-07-14
