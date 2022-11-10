@@ -28,7 +28,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <hook type="after_prepare" src="hooks/android/androidCopyPreferences.js" />
         <hook type="before_plugin_install" src="hooks/android/build_gradle_add_dependency.js" />
 
-        <preference name="ANDROID_FIREBASE_DYNAMICLINKS_VERSION" default="20.1.+"/>
+        <preference name="ANDROID_FIREBASE_DYNAMICLINKS_VERSION" default="20.1.1"/>
 
         <config-file parent="/*" target="res/xml/config.xml">
             <preference name="DOMAIN_URI_PREFIX" value="https://$APP_DOMAIN_NAME$APP_DOMAIN_PATH"/>
