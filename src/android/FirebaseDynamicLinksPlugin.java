@@ -1,5 +1,6 @@
 package by.chemerisuk.cordova.firebase;
 
+import static by.chemerisuk.cordova.support.ExecutionThread.WORKER;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
