@@ -8,8 +8,8 @@ module.exports = function(ctx) {
 
 var googleServicesStr = "if (project.extensions.findByName('googleServices') == null) { apply plugin: 'com.google.gms.google-services' }"
 var googleServicesStrExists = false
-var classpathsStrToVerify = "com.google.gms:google-services:4.3.10"
-var classpathsStr = '\t\tclasspath "com.google.gms:google-services:4.3.10"'
+var classpathsStrToVerify = "com.google.gms:google-services:4.3.14"
+var classpathsStr = '\t\tclasspath "com.google.gms:google-services:4.3.14"'
 var rootBuildGradlePath = "platforms/android/build.gradle"
 var appBuildGradlePath = "platforms/android/app/build.gradle"
 
