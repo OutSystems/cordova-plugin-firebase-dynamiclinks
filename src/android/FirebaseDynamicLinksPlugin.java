@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import by.chemerisuk.cordova.support.CordovaMethod;
+import by.chemerisuk.cordova.support.ExecutionThread;
 import by.chemerisuk.cordova.support.ReflectiveCordovaPlugin;
 
 
