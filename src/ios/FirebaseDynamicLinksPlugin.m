@@ -1,5 +1,7 @@
 #import "FirebaseDynamicLinksPlugin.h"
 
+@import FirebaseCore;
+
 @implementation FirebaseDynamicLinksPlugin
 
 - (void)pluginInitialize {
