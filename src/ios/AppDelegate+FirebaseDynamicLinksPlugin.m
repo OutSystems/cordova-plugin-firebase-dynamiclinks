@@ -2,7 +2,6 @@
 #import "FirebaseDynamicLinksPlugin.h"
 #import <objc/runtime.h>
 
-
 @implementation AppDelegate (FirebaseDynamicLinksPlugin)
 
 + (void)load {
@@ -56,18 +55,37 @@
     FirebaseDynamicLinksPlugin* dl = [self.viewController getCommandInstance:@"FirebaseDynamicLinks"];
     // handle firebase dynamic link
     return [[FIRDynamicLinks dynamicLinks]
-        handleUniversalLink:userActivity.webpageURL
-        completion:^(FIRDynamicLink * _Nullable dynamicLink, NSError * _Nullable error) {
+            handleUniversalLink:userActivity.webpageURL
+            completion:^(FIRDynamicLink * _Nullable dynamicLink, NSError * _Nullable error) {
+        // assign obtained variable to the one to post.
+        __block FIRDynamicLink *dynamicLinkToPost;
+        
+        // creates a group to vobtained the block's value.
+        dispatch_group_t group = dispatch_group_create();
+        dispatch_group_enter(group);
+        
+        // If `dynamicLink` is filled, just set `dynamicLinkToPost` with it.
+        // Otherwise, we need to obtain it from the Universal Link URL.
+        if (dynamicLink) {
+            dynamicLinkToPost = dynamicLink;
+            dispatch_group_leave(group);
+        } else {
             // Try this method as some dynamic links are not recognize by handleUniversalLink
             // ISSUE: https://github.com/firebase/firebase-ios-sdk/issues/743
-            dynamicLink = dynamicLink ? dynamicLink
-                : [[FIRDynamicLinks dynamicLinks]
-                   dynamicLinkFromUniversalLinkURL:userActivity.webpageURL];
-
-            if (dynamicLink) {
-                [dl postDynamicLink:dynamicLink];
+            [[FIRDynamicLinks dynamicLinks]
+             dynamicLinkFromUniversalLinkURL:userActivity.webpageURL
+             completion:^(FIRDynamicLink * _Nullable alternateDynamicLink, NSError * _Nullable error) {
+                dynamicLinkToPost = alternateDynamicLink;
+                dispatch_group_leave(group);
+            }];
+        }
+        
+        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+            if (dynamicLinkToPost) {
+                [dl postDynamicLink:dynamicLinkToPost];
             }
-        }] || handled;
+        });
+    }] || handled;
 }
 
 @end
