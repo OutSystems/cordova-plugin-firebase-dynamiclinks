@@ -1,7 +1,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
 xmlns:android="http://schemas.android.com/apk/res/android"
            id="cordova-plugin-firebase-dynamiclinks"
-      version="5.0.0-OS11">
+      version="5.0.0-OS12">
 
     <name>FirebaseDynamicLinksPlugin</name>
     <description>Cordova plugin for Firebase Dynamic Links</description>
@@ -28,8 +28,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <hook type="after_prepare" src="hooks/android/androidCopyPreferences.js" />
         <hook type="before_plugin_install" src="hooks/android/build_gradle_add_dependency.js" />
 
-        <preference name="ANDROID_FIREBASE_DYNAMICLINKS_VERSION" default="20.1.1"/>
-
         <config-file parent="/*" target="res/xml/config.xml">
             <preference name="DOMAIN_URI_PREFIX" value="https://$APP_DOMAIN_NAME$APP_DOMAIN_PATH"/>
             <feature name="FirebaseDynamicLinks">
@@ -54,7 +52,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
         <dependency id="cordova-support-android-plugin" version="~1.0.0"/>
 
-        <framework src="com.google.firebase:firebase-dynamic-links:$ANDROID_FIREBASE_DYNAMICLINKS_VERSION" />
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
     </platform>
 
     <platform name="ios">
